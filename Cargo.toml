@@ -1,0 +1,22 @@
+[package]
+name = "rtos"
+version = "0.1.0"
+edition = "2024"
+
+# No third-party crates: startup code, registers and context switching are all written by hand
+
+[[bin]]
+name = "rtos"
+test = false
+bench = false
+
+[profile.dev]
+opt-level = "s"
+panic = "abort"
+
+[profile.release]
+opt-level = "s"
+debug = true          # only affects debug info in the ELF; nothing extra goes into Flash
+lto = true
+codegen-units = 1
+panic = "abort"
